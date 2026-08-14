@@ -1,0 +1,19 @@
+# The layer this bundle contributes when a profile lists it, which is what
+# `dsh plugin --profile web add dsh-plugin-call-me` arranges.
+#
+# No `config:` block on purpose. Every setting has a schema default, and the
+# paired phone number is read from this machine's /call-me config, so the plugin
+# needs nothing here to work. To change a setting, add your own row in the
+# profile's cordis.patch.yml (later layers win per row, and a patch replaces a
+# row's whole config value, so restate every key you need):
+#
+# - insert:
+#     - id: call-me
+#       name: dsh-plugin-call-me
+#       config:
+#         turnEnd:
+#           mode: call
+#           graceSeconds: 60
+- insert:
+    - id: call-me
+      name: dsh-plugin-call-me

@@ -1,0 +1,76 @@
+{
+  "name": "dsh-plugin-call-me",
+  "version": "0.1.0",
+  "description": "Your DeepSeek Harness agent rings your actual phone. It asks out loud, you answer out loud, and what you said steers the run.",
+  "keywords": [
+    "dsh-plugin",
+    "dsh",
+    "deepseek-harness",
+    "deepseek",
+    "deepseek-ai",
+    "cordis",
+    "plugin",
+    "phone",
+    "phone-call",
+    "call",
+    "voice",
+    "notify",
+    "notification",
+    "notifications",
+    "approval",
+    "human-in-the-loop",
+    "reachability",
+    "iphone",
+    "ios",
+    "callkit",
+    "afk",
+    "agent"
+  ],
+  "homepage": "https://github.com/radres/dsh-plugin-call-me#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radres/dsh-plugin-call-me.git"
+  },
+  "bugs": {
+    "url": "https://github.com/radres/dsh-plugin-call-me/issues"
+  },
+  "license": "MIT",
+  "author": "Serdar Oztetik",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml"
+  ],
+  "engines": {
+    "node": ">=20",
+    "dsh": ">=0.0.1"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "dshx": {
+    "contributes": {
+      "tools": [
+        "call_me",
+        "text_me"
+      ],
+      "skills": []
+    }
+  },
+  "dependencies": {
+    "schemastery": "^3.18.0"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check": "node --check lib/index.js && node --check lib/api.js && node --check lib/identity.js"
+  }
+}
