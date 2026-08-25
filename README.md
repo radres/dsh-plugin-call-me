@@ -151,8 +151,7 @@ that belongs to the app.
 
 Known limits, stated plainly:
 
-- **iPhone today.** An Android build exists and is in closed testing, so it is
-  not something you can install yet.
+- **iPhone only.** There is no Android app.
 - **`approval.mode: answer` holds the desktop prompt while the phone rings.**
   That is the cost of taking the decision by voice; the other modes hold nothing.
 - **A voice answer is a transcript.** The approval path accepts only a clear yes
