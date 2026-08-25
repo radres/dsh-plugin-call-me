@@ -28,7 +28,7 @@ dsh plugin --profile web add github:radres/dsh-plugin-call-me
 Plain JavaScript, no build step, so a git install needs no `allowBuilds`
 permission. Then pair a phone:
 
-1. Get the free **/call-me** app: https://serdaroztetik.com/aiphone/go/dsh (iPhone)
+1. Get the **/call-me** app: https://serdaroztetik.com/aiphone/go/dsh (iPhone)
 2. Open it. It shows a 10-digit number.
 3. Tell the plugin about it, in the profile's `cordis.patch.yml`:
 
@@ -140,7 +140,7 @@ to leave installed:
 
 ## What this is
 
-/call-me is a free hosted service plus a free iPhone app. Calls arrive over
+/call-me is a hosted service plus an iPhone app. Calls arrive over
 CallKit and VoIP push, what you say is transcribed live and not stored, and the
 agent never learns your real phone number: it dials a 10-digit /call-me number
 that belongs to the app.
