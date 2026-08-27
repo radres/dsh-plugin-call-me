@@ -23,7 +23,7 @@ dsh plugin --profile web add github:radres/dsh-plugin-call-me
 
 纯 JavaScript，没有构建步骤，所以从 git 安装不需要 `allowBuilds` 授权。然后绑定手机：
 
-1. 安装免费的 **/call-me** App：https://serdaroztetik.com/aiphone/go/dsh （iPhone）
+1. 安装 **/call-me** App：https://serdaroztetik.com/aiphone/go/dsh （iPhone）
 2. 打开它，里面会显示一个 10 位数字。
 3. 在 profile 的 `cordis.patch.yml` 里告诉插件这个号码：
 
@@ -126,7 +126,7 @@ curl -sS https://serdaroztetik.com/aiphone/ring \
 
 ## 这是什么
 
-/call-me 是一个免费的托管服务加一个免费的 iPhone App。来电走 CallKit 和 VoIP push，
+/call-me 是一个托管服务加一个 iPhone App。来电走 CallKit 和 VoIP push，
 你说的话实时转写、不做存储，agent 也永远不会知道你真实的手机号：它拨的是 App 里
 那个 10 位的 /call-me 号码。
 
