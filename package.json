@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-call-me",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Your DeepSeek Harness agent rings your actual phone. It asks out loud, you answer out loud, and what you said steers the run.",
   "keywords": [
     "dsh-plugin",
