@@ -350,6 +350,24 @@ describe('approval by phone', () => {
     assert.equal(await ctx.emit('approval/request', { toolName: 'bash' }, async () => 'unavailable'), 'rejected')
   })
 
+  for (const transcript of ['No, do not approve it.', "Don't do it.", 'Not okay.', 'I am not sure.', 'Only if the tests pass, go ahead.']) {
+    it(`does not approve an ambiguous or negated answer: ${transcript}`, async () => {
+      fakeFetch(() => ({ status: 'completed', transcript }))
+      const ctx = fakeCtx(fakeAgent())
+      apply(ctx, { approval: { mode: 'answer' }, inbound: { enabled: false } })
+      assert.equal(await ctx.emit('approval/request', { toolName: 'bash' }, async () => 'unavailable'), 'rejected')
+    })
+  }
+
+  for (const transcript of ['Yes.', 'Yes, go ahead!', 'Okay, do it.', 'Permission granted.', 'Yes, please.', 'Please go ahead.']) {
+    it(`accepts a clear affirmative answer: ${transcript}`, async () => {
+      fakeFetch(() => ({ status: 'completed', transcript }))
+      const ctx = fakeCtx(fakeAgent())
+      apply(ctx, { approval: { mode: 'answer' }, inbound: { enabled: false } })
+      assert.equal(await ctx.emit('approval/request', { toolName: 'bash' }, async () => 'unavailable'), 'allowed-once')
+    })
+  }
+
   it('hands an unanswered call back to whoever is at the keyboard', async () => {
     fakeFetch(() => ({ status: 'missed', transcript: '' }))
     const ctx = fakeCtx(fakeAgent())
