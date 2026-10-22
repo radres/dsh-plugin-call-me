@@ -291,6 +291,23 @@ describe('turn-end reachability', () => {
     ctx.dispose()
   })
 
+  for (const mode of ['text', 'call']) {
+    for (const quietSeconds of [0, 900]) {
+      it(`honors quietSeconds=${quietSeconds} when delayed ${mode} notifications fire together`, (t) => {
+        t.mock.timers.enable({ apis: ['setTimeout'] })
+        const calls = fakeFetch(() => ({ status: 'missed' }))
+        const ctx = fakeCtx(fakeAgent())
+        apply(ctx, { quietSeconds, turnEnd: { mode, graceSeconds: 60 }, inbound: { enabled: false } })
+        for (const id of ['session-1', 'session-2']) {
+          ctx.emit('session/event', { id }, { type: 'turn/end', data: { reason: { kind: 'completed' } } })
+        }
+        t.mock.timers.tick(60_000)
+        const endpoint = mode === 'call' ? '/ring' : '/text'
+        assert.equal(calls.filter((call) => call.url.endsWith(endpoint)).length, quietSeconds === 0 ? 2 : 1)
+      })
+    }
+  }
+
   it('ignores a turn ending that is not in the configured reasons', async () => {
     const calls = fakeFetch(() => ({ ok: true }))
     const ctx = fakeCtx(fakeAgent())
