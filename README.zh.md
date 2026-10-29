@@ -23,7 +23,7 @@ dsh plugin --profile web add github:radres/dsh-plugin-call-me
 
 纯 JavaScript，没有构建步骤，所以从 git 安装不需要 `allowBuilds` 授权。然后绑定手机：
 
-1. 安装 **/call-me** App：https://serdaroztetik.com/aiphone/go/dsh （iPhone）
+1. 安装 **/call-me** App：https://callmemcp.com/go/dsh （iPhone）或 https://callmemcp.com/go/play-dsh （Android）
 2. 打开它，里面会显示一个 10 位数字。
 3. 在 profile 的 `cordis.patch.yml` 里告诉插件这个号码：
 
@@ -126,17 +126,17 @@ curl -sS https://serdaroztetik.com/aiphone/ring \
 
 ## 这是什么
 
-/call-me 是一个托管服务加一个 iPhone App。来电走 CallKit 和 VoIP push，
-你说的话实时转写、不做存储，agent 也永远不会知道你真实的手机号：它拨的是 App 里
+/call-me 是一个托管服务加一个手机 App（iPhone 和 Android）。来电是真正的来电界面
+（iPhone 上走 CallKit，Android 上是全屏来电），你说的话实时转写、不做存储，agent 也永远不会知道你真实的手机号：它拨的是 App 里
 那个 10 位的 /call-me 号码。
 
-- App Store：https://serdaroztetik.com/aiphone/go/dsh
+- App Store：https://callmemcp.com/go/dsh
+- Google Play：https://callmemcp.com/go/play-dsh
 - 隐私政策：https://serdaroztetik.com/aiphone/privacy
 - 同时也支持 Claude Code，并提供远程 MCP server：https://github.com/radres/call-me
 
 需要如实说明的限制：
 
-- **目前只有 iPhone。** Android 版本已经存在，但还在封闭测试，现在装不了。
 - **`approval.mode: answer` 在响铃期间会占住桌面端的审批提示。** 这是用语音做决定的代价；
   其他模式不占用。
 - **语音回答是转写文本。** 审批路径只接受明确的「yes」，其他一律拒绝，但也别把它
