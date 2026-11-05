@@ -350,6 +350,26 @@ describe('approval by phone', () => {
     assert.equal(await ctx.emit('approval/request', { toolName: 'bash' }, async () => 'unavailable'), 'rejected')
   })
 
+  it('never reads a refusal or a hesitation that contains a yes word as approval', async () => {
+    const { isClearYes } = await import('../lib/index.js')
+    for (const no of [
+      'do not approve', 'not ok', 'I am not sure', "don't do it", 'no, do not allow it',
+      'yes but wait', 'okay, hold on', 'maybe, sure', 'sure, after the tests pass first',
+      'never ship it', 'cancel, do not merge it', "I don't know, okay?", 'ok what is it running',
+      '', 'hmm okay',
+    ]) assert.equal(isClearYes(no), false, no)
+    for (const yes of ['yes', 'Yeah, go ahead.', 'ok', 'approved', 'sure, do it', 'yep ship it']) {
+      assert.equal(isClearYes(yes), true, yes)
+    }
+  })
+
+  it('denies a transcribed "do not approve" on a live call', async () => {
+    fakeFetch(() => ({ status: 'completed', transcript: 'do not approve that' }))
+    const ctx = fakeCtx(fakeAgent())
+    apply(ctx, { approval: { mode: 'answer' }, quietSeconds: 0, inbound: { enabled: false } })
+    assert.equal(await ctx.emit('approval/request', { toolName: 'bash' }, async () => 'unavailable'), 'rejected')
+  })
+
   it('hands an unanswered call back to whoever is at the keyboard', async () => {
     fakeFetch(() => ({ status: 'missed', transcript: '' }))
     const ctx = fakeCtx(fakeAgent())
